@@ -7,6 +7,8 @@ import Report from "./pages/Report";
 import Profile from "./pages/Profile";
 import Security from "./pages/Security";
 import FloatingIcons from "./components/FloatingIcons";
+import ViewComplaints from "./pages/ViewComplaints";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,6 +21,7 @@ export default function App() {
         {/* 👉 ADD THESE TWO */}
         <Route path="/profile" element={<Profile />} />
         <Route path="/security" element={<Security />} />
+        <Route path="/view" element={<ViewComplaints/>}/>
       </Routes>
     </BrowserRouter>
   );
