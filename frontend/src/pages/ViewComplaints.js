@@ -17,8 +17,8 @@ export default function ViewComplaints(){
  <Navbar/>
 
  <div style={{padding:"30px"}}>
-   <h2 style={{textAlign:"center"}}>Community Reports</h2>
-   <p style={{textAlign:"center"}}>
+   <h2 style={{textAlign:"center",color:"white"}} >Community Reports</h2>
+   <p style={{textAlign:"center",color:"whitesmoke"}}>
      Browse issues reported by the community and track their status.
    </p>
 

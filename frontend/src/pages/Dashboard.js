@@ -36,7 +36,7 @@ export default function Dashboard(){
 
       <div style={{padding:"30px"}}>
 
-        <h2>User Dashboard</h2>
+        <h2 style={{color:"white"}}>User Dashboard</h2>
 
         {/* ===== STATUS CARDS ===== */}
         <div style={{

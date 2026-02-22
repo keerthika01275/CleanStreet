@@ -57,19 +57,19 @@ export default function Report(){
 
  <div className="report-container">
 
-  <h2>Report an Issue</h2>
-  <p>Help improve our community by reporting problems.</p>
+  <h2 style={{color:"white"}}>Report an Issue</h2>
+  <p style={{color:"white"}}>Help improve our community by reporting problems.</p>
 
   <div className="report-grid">
 
    {/* LEFT FORM */}
    <div className="report-form">
 
-    <label>Issue Title</label>
+    <label style={{color:"white"}}>Issue Title</label>
     <input onChange={e=>setTitle(e.target.value)}
      placeholder="Overflowing garbage bin"/>
 
-    <label>Issue Type</label>
+    <label style={{color:"white"}}>Issue Type</label>
     <select onChange={e=>setType(e.target.value)}>
       <option>Select</option>
       <option>Garbage</option>
@@ -78,7 +78,7 @@ export default function Report(){
       <option>Water Leakage</option>
     </select>
 
-    <label>Priority Level</label>
+    <label style={{color:"white"}}>Priority Level</label>
     <select onChange={e=>setPriority(e.target.value)}>
       <option>Select</option>
       <option>Low</option>
@@ -86,21 +86,21 @@ export default function Report(){
       <option>High</option>
     </select>
 
-    <label>Full Address</label>
+    <label style={{color:"white"}}>Full Address</label>
     <input onChange={e=>setAddress(e.target.value)}
      placeholder="12 Main Street"/>
 
-    <label>Nearby Landmark</label>
+    <label style={{color:"white"}}>Nearby Landmark</label>
     <input onChange={e=>setLandmark(e.target.value)}
      placeholder="Opposite Bus Stop"/>
 
-    <label>Detailed Description</label>
+    <label style={{color:"white"}}>Detailed Description</label>
     <textarea onChange={e=>setDesc(e.target.value)}
      placeholder="Explain the problem"/>
 
 
     {/* ✅ PHOTO UPLOAD */}
-    <label>Attach Photo (Optional)</label>
+    <label style={{color:"white"}}>Attach Photo (Optional)</label>
     <input
       type="file"
       accept="image/*"

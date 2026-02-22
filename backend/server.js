@@ -29,7 +29,7 @@ app.use("/uploads", express.static("uploads"));
 
 const MONGO_URL =
 process.env.MONGO_URL ||
-"mongodb+srv://keerthika15122005_db_user:keerthi123%40@cluster0.koa92ls.mongodb.net/cleanstreet";
+"mongodb+srv://Keerthika:keerthi123%40@cluster0.uvfegyv.mongodb.net/?appName=Cluster0";
 
 mongoose.connect(MONGO_URL)
 .then(()=>console.log("✅ MongoDB Connected"))
