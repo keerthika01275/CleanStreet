@@ -46,7 +46,7 @@ export default function Navbar(){
        Report Issue
      </span>
 
-     <span style={active("/dashboard")} onClick={()=>nav("/view")}>
+     <span style={active("/view")} onClick={()=>nav("/view")}>
        View Complaints
      </span>
    </div>

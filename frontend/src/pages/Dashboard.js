@@ -12,7 +12,6 @@ export default function Dashboard(){
   const nav = useNavigate();
 
   useEffect(()=>{
-
     if(!user){
       alert("Please login first");
       nav("/");
@@ -23,8 +22,13 @@ export default function Dashboard(){
       .get("http://localhost:5000/api/myComplaints/" + user._id)
       .then(res=>setList(res.data))
       .catch(()=>alert("Error loading complaints"));
-
   },[]);
+
+  /* ===== CALCULATIONS ===== */
+  const total = list.length;
+  const pending = list.filter(c=>c.status==="received").length;
+  const progress = list.filter(c=>c.status==="in progress").length;
+  const resolved = list.filter(c=>c.status==="resolved").length;
 
   return(
     <>
@@ -32,77 +36,70 @@ export default function Dashboard(){
 
       <div style={{padding:"30px"}}>
 
-        {/* HEADER */}
-        <div style={{
-          display:"flex",
-          justifyContent:"space-between",
-          alignItems:"center"
-        }}>
-          <h2>My Complaints</h2>
+        <h2>User Dashboard</h2>
 
-          <button
-            style={{
-              padding:"10px 15px",
-              background:"#2d6cdf",
-              color:"white",
-              border:"none",
-              borderRadius:"6px",
-              cursor:"pointer"
-            }}
-            onClick={()=>nav("/report")}
-          >
-            + Report Issue
-          </button>
-        </div>
-
-        {/* EMPTY */}
-        {list.length === 0 && (
-          <p style={{marginTop:"20px"}}>
-            No complaints yet 😢
-          </p>
-        )}
-
-        {/* LIST */}
+        {/* ===== STATUS CARDS ===== */}
         <div style={{
           display:"grid",
-          gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",
+          gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",
           gap:"20px",
           marginTop:"20px"
         }}>
+          <Card title="Total Issues" value={total}/>
+          <Card title="Pending" value={pending}/>
+          <Card title="In Progress" value={progress}/>
+          <Card title="Resolved" value={resolved}/>
+        </div>
 
-        {list.map(c=>(
-          <div
-            key={c._id}
-            style={{
-              background:"white",
-              padding:"15px",
-              borderRadius:"10px",
-              boxShadow:"0 5px 15px rgba(0,0,0,0.1)"
-            }}
-          >
+        {/* ===== MAIN GRID ===== */}
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"2fr 1fr",
+          gap:"20px",
+          marginTop:"30px"
+        }}>
 
-            {/* PHOTO */}
-            {c.photo && (
-              <img
-                src={"http://localhost:5000/uploads/" + c.photo}
-                alt="complaint"
-                style={{
-                  width:"100%",
-                  borderRadius:"8px",
-                  marginBottom:"10px"
-                }}
-              />
-            )}
+          {/* ===== RECENT ACTIVITY ===== */}
+          <div style={{
+            background:"white",
+            padding:"20px",
+            borderRadius:"10px",
+            boxShadow:"0 5px 15px rgba(0,0,0,0.1)"
+          }}>
+            <h3>Recent Activity</h3>
 
-            <h3>{c.title}</h3>
+            {list.slice(0,3).map(c=>(
+              <div key={c._id} style={{marginTop:"15px"}}>
+                <b>{c.title}</b>
+                <p style={{fontSize:"13px",color:"gray"}}>
+                  Status: {c.status}
+                </p>
+              </div>
+            ))}
 
-            <p><b>Status:</b> {c.status}</p>
-            <p><b>Type:</b> {c.type}</p>
-            <p><b>Priority:</b> {c.priority}</p>
-            <p><b>Address:</b> {c.address}</p>
+            {list.length===0 && <p>No activity yet 😢</p>}
+          </div>
+
+          {/* ===== QUICK ACTIONS ===== */}
+          <div style={{
+            background:"white",
+            padding:"20px",
+            borderRadius:"10px",
+            boxShadow:"0 5px 15px rgba(0,0,0,0.1)"
+          }}>
+            <h3>Quick Actions</h3>
+
+            <button style={btnBlue}
+              onClick={()=>nav("/report")}>
+              + Report New Issue
+            </button>
+
+            <button style={btnLight}
+              onClick={()=>nav("/view")}>
+              View All Complaints
+            </button>
 
           </div>
-        ))}
 
         </div>
 
@@ -110,3 +107,40 @@ export default function Dashboard(){
     </>
   );
 }
+
+/* ===== SMALL CARD COMPONENT ===== */
+function Card({title,value}){
+ return(
+  <div style={{
+    background:"white",
+    padding:"20px",
+    borderRadius:"10px",
+    textAlign:"center",
+    boxShadow:"0 5px 15px rgba(0,0,0,0.1)"
+  }}>
+    <h1>{value}</h1>
+    <p>{title}</p>
+  </div>
+ );
+}
+
+const btnBlue={
+ width:"100%",
+ padding:"12px",
+ marginTop:"15px",
+ background:"#2d6cdf",
+ color:"white",
+ border:"none",
+ borderRadius:"6px",
+ cursor:"pointer"
+};
+
+const btnLight={
+ width:"100%",
+ padding:"12px",
+ marginTop:"10px",
+ background:"#eee",
+ border:"none",
+ borderRadius:"6px",
+ cursor:"pointer"
+};
